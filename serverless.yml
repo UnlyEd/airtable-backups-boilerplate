@@ -1,0 +1,86 @@
+service: airtable-backups-demo
+
+frameworkVersion: "=1.46.0"
+
+plugins:
+  - serverless-plugin-epsagon # Must be first, see https://github.com/epsagon/serverless-plugin-epsagon
+  - serverless-bundle # See https://github.com/AnomalyInnovations/serverless-bundle
+  - serverless-offline # See https://github.com/dherault/serverless-offline
+  - '@unly/serverless-env-copy-plugin' # See https://github.com/UnlyEd/serverless-env-copy-plugin
+  - serverless-dotenv-plugin # See https://www.npmjs.com/package/serverless-dotenv-plugin
+
+custom:
+  epsagon:
+    token: '' # TODO Set your Epsagon token - Won't be applied if not provided
+    appName: ${self:service}-${self:custom.environment}
+  environment: ${env:NODE_ENV, 'development'} # Defaults to "development" if not provided (see package.json scripts)
+  envs:
+    development: # Necessary for running SLS scripts locally, but not shouldn't be used to deploy anything
+      profile:
+      memorySize:
+    staging:
+      profile: sandbox # TODO replace by your own serverless profile, or provide AWS credentials directly if you don't use profiles
+      memorySize: 256
+    production:
+      profile: sandbox # TODO replace by your own serverless profile, or provide AWS credentials directly if you don't use profiles
+      memorySize: 256
+  bucket: ${self:service}-${self:custom.environment}
+  serverless-offline:
+    port: 3000
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  versionFunctions: false
+  logRetentionInDays: 60
+  timeout: 30
+  memorySize: ${self:custom.envs.${self:provider.stage}.memorySize, '128'}
+  stage: ${self:custom.environment} # XXX The stage directly depends on the environment, it's the same thing
+  region: ${opt:region, 'eu-west-1'} # Ireland by default, change as you need
+  environment:
+    NODE_ENV: ${self:custom.environment}
+    SERVICE: ${self:service}
+    S3_BUCKET: ${self:custom.bucket}
+  profile: ${self:custom.envs.${self:provider.stage}.profile, ''}
+  logs:
+    restApi: true # Enable logs in other services, such as API GW - See https://serverless.com/blog/framework-release-v142/
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*' # Allow to return all binary response types - See https://serverless.com/blog/framework-release-v142/
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  deploymentBucket:
+    serverSideEncryption: AES256
+  stackTags:
+    env: ${self:custom.environment}
+    stage: ${self:provider.stage}
+    region: ${self:provider.region}
+    service: ${self:service}
+    runtime: ${self:provider.runtime}
+
+functions:
+  status:
+    handler: src/functions/status.handler
+    events:
+      - http:
+          path: status
+          method: get
+
+  makeAirtableBackup:
+    handler: src/functions/makeBackup.handler
+    events:
+      - http:
+          path: /backup
+          method: post
+      - schedule:
+          description: "Airtable backups for the 'Airtable backups boilerplate' base (demo)"
+          rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+          enabled: true
+          input: # XXX As a demo, we use a base generated from an official template, it's also used to perform automated tests (CI)
+            AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
+            AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
+            S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in

@@ -1,0 +1,57 @@
+{
+  "name": "@unly/airtable-backups-boilerplate",
+  "version": "1.0.0",
+  "description": "Configurable automated backups for Airtable meant to be self-hosted, powered by AWS Lambda/S3",
+  "private": true,
+  "scripts": {
+    "sls:dotenv": "NODE_ENV=${NODE_ENV:-development}; sls dotenv",
+    "sls:login": "sls login",
+    "sls:check": "NODE_ENV=${NODE_ENV:-development}; sls print",
+    "sls:remove": "NODE_ENV=${NODE_ENV:-staging} sls remove",
+    "sls:info": "NODE_ENV=${NODE_ENV:-staging} sls info",
+    "start": "NODE_ENV=${NODE_ENV:-development}; sls offline start",
+    "invoke:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} yarn sls:dotenv && sls invoke local -f airtableBackupsBoilerplate -p mocks/test-event.json",
+    "deploy": "NODE_ENV=${NODE_ENV:-staging} sls deploy",
+    "logs:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} sls logs -f airtableBackupsBoilerplate --tail",
+    "logs:status": "NODE_ENV=${NODE_ENV:-staging}; sls logs -f status -s $NODE_ENV --startTime 10m",
+    "preversion": "yarn run test:once",
+    "postversion": "git push && git push --tags",
+    "release": "yarn bump --tag",
+    "doc:toc": "yarn markdown-toc --maxdepth 4 -i README.md",
+    "sync:fork": "BRANCH=${BRANCH:-master}; git pull --rebase git@github.com:UnlyEd/airtable-backups-boilerplate.git ${BRANCH}",
+    "sync:fork:merge": "BRANCH=${BRANCH:-master}; git pull git@github.com:UnlyEd/airtable-backups-boilerplate.git ${BRANCH}",
+    "test": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --watch",
+    "test:serie": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --watch --runInBand",
+    "test:once": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test",
+    "test:coverage": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --coverage",
+    "test:coverage:serie": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --coverage --runInBand"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./jest-preload-env.js",
+      "jest-extended"
+    ]
+  },
+  "dependencies": {
+    "@unly/utils-aws": "1.0.3",
+    "airtable": "0.7.1",
+    "aws-sdk": "2.534.0",
+    "dotenv": "8.0.0",
+    "epsagon": "1.37.0",
+    "moment": "2.24.0",
+    "serverless-plugin-epsagon": "1.6.1"
+  },
+  "devDependencies": {
+    "@unly/serverless-env-copy-plugin": "1.0.0",
+    "git-revision-webpack-plugin": "3.0.3",
+    "jest": "24.8.0",
+    "jest-extended": "0.11.1",
+    "markdown-toc": "1.2.0",
+    "serverless": "1.46.0",
+    "serverless-bundle": "1.2.3",
+    "serverless-domain-manager": "2.6.0",
+    "serverless-dotenv-plugin": "2.0.1",
+    "serverless-offline": "5.8.0",
+    "version-bump-prompt": "5.0.0"
+  }
+}
