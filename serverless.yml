@@ -1,0 +1,60 @@
+service: PROJECT-NAME
+
+frameworkVersion: "=1.46.0"
+
+plugins:
+  - serverless-bundle # Must be first, see https://github.com/AnomalyInnovations/serverless-bundle
+  - serverless-offline # See https://github.com/dherault/serverless-offline
+  - '@unly/serverless-env-copy-plugin' # See https://github.com/UnlyEd/serverless-env-copy-plugin
+  #  - serverless-domain-manager # See https://github.com/amplify-education/serverless-domain-manager
+  - serverless-dotenv-plugin # See https://www.npmjs.com/package/serverless-dotenv-plugin
+
+custom:
+  environment: ${env:NODE_ENV, 'development'} # Defaults to "development" if not provided (see package.json scripts)
+  envs:
+    development: # Necessary for running SLS scripts locally, but not shouldn't be used to deploy anything
+      profile: sandbox # XXX TODO use staging aws profile
+      memorySize: 128
+    staging:
+      profile: sandbox # XXX TODO use staging aws profile
+      memorySize: 128
+    production:
+      profile: sandbox # XXX TODO use production aws profile
+      memorySize: 512
+  serverless-offline:
+    port: 3000
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  versionFunctions: false
+  logRetentionInDays: 60
+  timeout: 30
+  memorySize: ${self:custom.envs.${self:provider.stage}.memorySize, '128'}
+  stage: ${self:custom.environment} # XXX The stage directly depends on the environment, it's the same thing
+  region: ${opt:region, 'eu-west-1'} # Ireland by default, must always be Ireland
+  environment:
+    NODE_ENV: ${self:custom.environment}
+    SERVICE: ${self:service}
+  profile: ${self:custom.envs.${self:provider.stage}.profile, ''}
+  logs:
+    restApi: true # Enable logs in other services, such as API GW - See https://serverless.com/blog/framework-release-v142/
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*' # Allow to return all binary response types - See https://serverless.com/blog/framework-release-v142/
+  deploymentBucket:
+    serverSideEncryption: AES256
+  stackTags:
+    env: ${self:custom.environment}
+    stage: ${self:provider.stage}
+    region: ${self:provider.region}
+    service: ${self:service}
+    runtime: ${self:provider.runtime}
+
+functions:
+  status:
+    handler: src/functions/status.handler
+    events:
+      - http:
+          path: status
+          method: get
