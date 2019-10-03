@@ -125,7 +125,8 @@ Session.vim
 .serverless
 
 # Sensitive
-.env.production
+.env*
+!.env.example
 
 # Tests
 coverage
