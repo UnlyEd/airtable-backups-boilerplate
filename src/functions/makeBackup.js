@@ -1,10 +1,10 @@
 import {fetchDataFromAirtable} from "../utils/airtableParser";
 import {uploadBackup} from "../utils/backup";
 import Epsagon from "epsagon";
+import {getOrganisationVariable} from "../utils/environment";
 
 export const handler = async (event, context, callback) => {
-    const tables = process.env.AIRTABLE_TABLES.split(";");
-
+    const tables = getOrganisationVariable("AIRTABLE_TABLES").split(";");
     const airtableContent = await fetchDataFromAirtable(tables);
     try {
         await uploadBackup(airtableContent);

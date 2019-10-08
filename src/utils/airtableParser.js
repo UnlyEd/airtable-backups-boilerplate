@@ -1,17 +1,13 @@
 import Epsagon from "epsagon";
 import airtable from "airtable";
-
-if (!process.env.AIRTABLE_TABLES) {
-    const err = Error("Could not find AIRTABLE_TABLES as environment variable. Exiting...");
-    Epsagon.setError(err);
-    throw err;
-}
+import {getOrganisationVariable} from "./environment";
 
 airtable.configure({
     endpointUrl: 'https://api.airtable.com',
     apiKey: process.env.AIRTABLE_TOKEN
 });
-const base = airtable.base(process.env.AIRTABLE_BASE);
+
+const base = airtable.base(getOrganisationVariable("AIRTABLE_BASE"));
 
 export const fetchDataFromAirtable = async (tables) => {
     let jsonRecords = {};

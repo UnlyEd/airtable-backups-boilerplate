@@ -80,6 +80,17 @@ functions:
       - http:
           path: /backup
           method: post
+      - schedule:
+          rate: rate(1 day)
+          enabled: false
+          input:
+            ORGANISATION_PREFIX: "GEM_"
+      - schedule:
+          rate: rate(1 day)
+          enabled: false
+          input:
+            ORGANISATION_PREFIX: "DEMO_"
+
   listBackups: # Change to check backup
     handler: src/functions/status.handler
     events:

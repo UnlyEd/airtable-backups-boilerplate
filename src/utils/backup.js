@@ -1,7 +1,8 @@
 import moment from "moment";
 import AWS from "aws-sdk";
+import {getOrganisationVariable} from "./environment";
 
-const BACKUP_NAME = moment().format('YYYY_MM_DD_HH-mm-ss') + ".json";
+const BACKUP_NAME = getOrganisationVariable("S3_DIRECTORY") + moment().format('YYYY_MM_DD_HH-mm-ss') + ".json";
 
 export const uploadBackup = async (jsonData) => {
     const s3 = new AWS.S3();

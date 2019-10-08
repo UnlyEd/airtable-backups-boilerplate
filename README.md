@@ -1,4 +1,4 @@
-# PROJECT-NAME
+# Backup Airtable
 
 This project was generated using https://github.com/UnlyEd/boilerplate-generator/tree/master/templates/node-v10.x-aws-serverless-with-serverless-bundle
 
@@ -22,7 +22,7 @@ This project was generated using https://github.com/UnlyEd/boilerplate-generator
 
 ## TODO (after generating a project from this boilerplate)
 
-- Rename occurrences of `PROJECT-NAME`
+- Rename occurrences of `backup-airtable`
 - Look for `TODO`
   - Use your own AWS profile instead of `sandbox`
 - Enable [sentry](https://sentry.io/organizations/unly/projects/), if needed (or delete)
