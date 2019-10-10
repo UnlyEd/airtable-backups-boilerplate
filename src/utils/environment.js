@@ -3,10 +3,10 @@ export const getOrganisationVariable = (variable) => {
         //epsagon
         throw Error(`Unknow ORGANISATION_PREFIX env var`);
     }
-    if (process.env.ORGANISATION_PREFIX + variable in process.env) {
+    if (process.env[process.env.ORGANISATION_PREFIX + variable]) {
         return process.env[process.env.ORGANISATION_PREFIX + variable];
-    } else {
-        //epsagon
-        throw Error(`Can't find variable process.env.ORGANISATION_PREFIX + variable`);
+
     }
+    //epsagon
+    throw Error(`Can't find variable ${process.env.ORGANISATION_PREFIX + variable}`);
 };
