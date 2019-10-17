@@ -12,7 +12,7 @@ plugins:
 
 custom:
   epsagon:
-    token: XXX
+    token: TODO
     appName: ${self:service}-${self:custom.environment}
   environment: ${env:NODE_ENV, 'development'} # Defaults to "development" if not provided (see package.json scripts)
   envs:
@@ -82,7 +82,7 @@ functions:
           rate: rate(1 day) # Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
           enabled: true
           input:
-            AIRTABLE_BASE: "XXX" # Set your own base production id
+            AIRTABLE_BASE: "TODO" # Set your own base production id
             AIRTABLE_TABLES: "Table 1;Table 2;Table 3" # Set your tables name
             "S3_DIRECTORY": "my-production-subdirectory/" # Set the s3 sub-directory
 
