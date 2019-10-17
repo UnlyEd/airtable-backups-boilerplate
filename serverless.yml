@@ -73,9 +73,6 @@ functions:
           method: get
   makeBackup:
     handler: src/functions/makeBackup.handler
-    package:
-      include:
-        - "*.tables*"
     events:
       - http:
           path: /backup
