@@ -1,15 +1,14 @@
-import Epsagon from "epsagon";
 import airtable from "airtable";
-import {getOrganisationVariable} from "./environment";
+import Epsagon from 'epsagon';
 
-airtable.configure({
-    endpointUrl: 'https://api.airtable.com',
-    apiKey: process.env.AIRTABLE_TOKEN
-});
+export const fetchDataFromAirtable = async (event, tables) => {
+    airtable.configure({
+        endpointUrl: 'https://api.airtable.com',
+        apiKey: process.env.AIRTABLE_TOKEN
+    });
 
-const base = airtable.base(getOrganisationVariable("AIRTABLE_BASE"));
+    const base = airtable.base(event["AIRTABLE_BASE"]);
 
-export const fetchDataFromAirtable = async (tables) => {
     let jsonRecords = {};
     for (let i = 0; i < tables.length; i++) {
         let el = tables[i];
