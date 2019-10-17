@@ -11,7 +11,7 @@ plugins:
 
 custom:
   epsagon:
-    token: 'a95057ad-1dc2-4ae2-a04d-b7c4632e669f' # TODO Set your Epsagon token - Won't be applied if not provided
+    token: '' # TODO Set your Epsagon token - Won't be applied if not provided
     appName: ${self:service}-${self:custom.environment}
   environment: ${env:NODE_ENV, 'development'} # Defaults to "development" if not provided (see package.json scripts)
   envs:
