@@ -1,17 +1,18 @@
 {
-  "name": "@unly/backup-airtable",
+  "name": "@unly/airtable-backups-boilerplate",
   "version": "1.0.0",
-  "description": "Boilerplate to make airtable backups and store it to AWS S3",
+  "description": "Configurable automated backups for Airtable meant to be self-hosted, powered by AWS Lambda/S3",
   "private": true,
   "scripts": {
     "sls:dotenv": "NODE_ENV=${NODE_ENV:-development}; sls dotenv",
-    "sls:login": "serverless login",
+    "sls:login": "sls login",
     "sls:check": "NODE_ENV=${NODE_ENV:-development}; sls print",
     "sls:remove": "NODE_ENV=${NODE_ENV:-staging} sls remove",
+    "sls:info": "NODE_ENV=${NODE_ENV:-staging} sls info",
     "start": "NODE_ENV=${NODE_ENV:-development}; sls offline start",
-    "invoke:makeBackup": "sls invoke local -f makeBackup -p data.json",
-    "deploy": "NODE_ENV=${NODE_ENV:-production} sls deploy",
-    "logs:makeBackup": "NODE_ENV=${NODE_ENV:-staging} sls logs -f makeBackup --tail",
+    "invoke:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} yarn sls:dotenv && sls invoke local -f airtableBackupsBoilerplate -p mocks/test-event.json",
+    "deploy": "NODE_ENV=${NODE_ENV:-staging} sls deploy",
+    "logs:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} sls logs -f airtableBackupsBoilerplate --tail",
     "logs:status": "NODE_ENV=${NODE_ENV:-staging}; sls logs -f status -s $NODE_ENV --startTime 10m",
     "preversion": "yarn run test:once",
     "postversion": "git push && git push --tags",
@@ -31,12 +32,12 @@
   },
   "dependencies": {
     "@unly/utils-aws": "1.0.3",
-    "airtable": "^0.7.1",
-    "aws-sdk": "^2.534.0",
+    "airtable": "0.7.1",
+    "aws-sdk": "2.534.0",
     "dotenv": "8.0.0",
-    "epsagon": "^1.37.0",
-    "moment": "^2.24.0",
-    "serverless-plugin-epsagon": "^1.6.1"
+    "epsagon": "1.37.0",
+    "moment": "2.24.0",
+    "serverless-plugin-epsagon": "1.6.1"
   },
   "devDependencies": {
     "@unly/serverless-env-copy-plugin": "1.0.0",

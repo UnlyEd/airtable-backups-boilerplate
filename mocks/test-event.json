@@ -1,0 +1,5 @@
+{
+  "AIRTABLE_BASE": "app7nfLmoVHva1Vdv",
+  "AIRTABLE_TABLES": "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment",
+  "S3_DIRECTORY": "airtableBackupsBoilerplate/"
+}

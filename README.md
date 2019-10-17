@@ -1,17 +1,25 @@
 # Airtable Backup Boilerplate
 
-This boilerplate allow you to configure Airtable backups and store it to AWS S3
+> This project is a boilerplate meant to perform backus of Airtable Bases, at a regular interval.
+> It is managed by AWS Lambda, used as crons. It stores the backups in an AWS S3 bucket.
+>
+> It is meant to be hosted on your own AWS Account, so you have complete ownership of the project and the backups.
+> 
+> In order to get started, fork this project and follow the install guide 
 
 <!-- toc -->
 
 - [Getting started](#getting-started)
   * [Install](#install)
-  * [Use](#use)
+  * [Configure your own Airtable settings](#configure-your-own-airtable-settings)
+    + [Local development](#local-development)
+    + [Start project locally](#start-project-locally)
+    + [Push to production](#push-to-production)
   * [Deploy](#deploy)
+  * [Error monitoring](#error-monitoring)
   * [Logs](#logs)
   * [Test](#test)
   * [Release](#release)
-- [Features/defaults provided by this boilerplate](#featuresdefaults-provided-by-this-boilerplate)
 
 <!-- tocstop -->
 
@@ -20,7 +28,9 @@ This boilerplate allow you to configure Airtable backups and store it to AWS S3
 ### Install
 
 ```bash
-yarn install
+nvm use # Select the same node version as the one that'll be used by AWS (see .nvmrc) (optional)
+yarn install # Install node modules
+yarn deploy #
 ```
 
 ### Configure your own Airtable settings

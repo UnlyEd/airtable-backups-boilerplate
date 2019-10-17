@@ -1,5 +1,5 @@
-import moment from 'moment';
 import { isHostedOnAws } from '@unly/utils-aws';
+import moment from 'moment';
 
 export const handler = async (event, context) => ({
   statusCode: 200,
