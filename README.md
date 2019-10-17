@@ -1,14 +1,9 @@
-# Backup Airtable
+# Airtable Backup Boilerplate
 
-This project was generated using https://github.com/UnlyEd/boilerplate-generator/tree/master/templates/node-v10.x-aws-serverless-with-serverless-bundle
-
-> This project is similar to node-v10.x-aws-serverless, but uses https://github.com/AnomalyInnovations/serverless-bundle to simplify the babel/webpack configuration.
-> Use this for a quick POC/test project. Beware that you won't be able to customise webpack/babel configurations using serverless-bundle (simplicity over flexibility).
-> For instance, it's not possible to customise webpack in order to configure Sentry. The Sentry integration has therefore been removed from this boilerplate. 
+This boilerplate allow you to configure Airtable backups and store it to AWS S3
 
 <!-- toc -->
 
-- [TODO (after generating a project from this boilerplate)](#todo-after-generating-a-project-from-this-boilerplate)
 - [Getting started](#getting-started)
   * [Install](#install)
   * [Use](#use)
@@ -20,56 +15,103 @@ This project was generated using https://github.com/UnlyEd/boilerplate-generator
 
 <!-- tocstop -->
 
-## TODO (after generating a project from this boilerplate)
-
-- Rename occurrences of `backup-airtable`
-- Look for `TODO`
-  - Use your own AWS profile instead of `sandbox`
-- Enable [sentry](https://sentry.io/organizations/unly/projects/), if needed (or delete)
-  - `serverless.yml`
-  - `.sentryclirc`
-- Delete this
-
-## Features/defaults provided by this boilerplate
-
-- Usage of https://github.com/AnomalyInnovations/serverless-bundle in order to simplify the webpack/babel setup, at the cost of flexibility
-- SLS handles stages/environments and settings per environment (memorySize, AWS profile, etc.)
-  - "staging" and "production" environments built-in
-- SLS scripts (helpers)
-- Environment variables built-in by default (both from .env* files and serverless.yml), using `dotenv` and `@unly/serverless-env-copy-plugin`
-- Jest for testing
-  - Jest extended https://github.com/jest-community/jest-extended included
-  - Support for ENV variables built-in
-- Use YARN for packaging
-- 30s timeout on lambda (max allowed)
-- 128Mo RAM on lambda (min allowed)
-- 60 days logs retention (avoid infinite logs and lambda price increase)
-- Enable API GW logs by default
-
 ## Getting started
 
 ### Install
 
-```
+```bash
 yarn install
 ```
 
-### Use
+### Configure your own Airtable settings
+#### Local development
+Use default environment:
+`cp .env.example .env.development`
 
+Then, fill the `AIRTABLE_TOKEN` with your own
+
+Open data.json
+```json
+{
+    "AIRTABLE_BASE": "XXX",
+    "AIRTABLE_TABLES": "Table 1;Table 2;Table 3",
+    "S3_DIRECTORY": "dev/"
+}
 ```
-yarn start
+Explanations :
+
+* **AIRTABLE_BASE** is the base you want to use for the local developmnent
+* **AIRTABLE_TABLES** are the tables name to backup, split by a `;`
+* **S3_DIRECTORY** is the S3 bucket sub-directory to use
+
+Fill free to change the S3 bucket's name in `serverless.yml`:
+```yaml
+custom:
+  bucket: airtable-backups
 ```
+
+#### Start project locally
+
+```bash
+yarn invoke:makeBackup
+```
+
+If the output of serverless is :
+```json
+{
+    "statusCode": 200,
+    "body": "Successfully created backup"
+}
+```
+
+All is right ! You can now check your S3 bucket
+
+#### Push to production
+Setup in [serverless.yml](./serverless.yml) the schedule :
+```yaml
+makeBackup:
+    handler: src/functions/makeBackup.handler
+    events:
+      - http:
+          path: /backup
+          method: post
+      - schedule:
+          description: "Name of the backup"
+          rate: rate(1 day) # Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+          enabled: true
+          input:
+            AIRTABLE_BASE: "XXX" # Set your own base production id
+            AIRTABLE_TABLES: "Table 1;Table 2;Table 3" # Set your tables name
+            "S3_DIRECTORY": "my-production-subdirectory/" # Set the s3 sub-directory
+```
+Of course, you're free to add as many schedule as you want !
 
 ### Deploy
 
+```bash
+yarn deploy # Deploy to production
 ```
-yarn deploy # Deploy to staging env
-NODE_ENV=production yarn deploy # Deploy to production env
+
+### Error monitoring
+We are using Epsagon in this boilerplate to monitor errors and lambda invoke. You can set up your own credientials [here](./serverless.yml) as:
+```yaml
+custom:
+  epsagon:
+    token: XXX # Set your own token
+    appName: ${self:service}-${self:custom.environment} # The will look as backup-airtable-production
 ```
+
+> If you don't want to use Epsagon to monitor your lambdas, don't care about this
 
 ### Logs
 
+**MakeBackup**:
+```bash
+yarn logs:makeBackup
 ```
+
+**Status**:
+```bash
 yarn logs:status
 ```
 
@@ -91,4 +133,3 @@ yarn release
 
 
 > Check the [./package.json](./package.json) file to see what other utility scripts are available
-# backup-airtable

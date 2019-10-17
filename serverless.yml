@@ -78,15 +78,13 @@ functions:
           path: /backup
           method: post
       - schedule:
-          rate: rate(1 day)
-          enabled: false
+          description: "Name of the backup"
+          rate: rate(1 day) # Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+          enabled: true
           input:
-            ORGANISATION_PREFIX: "GEM_"
-      - schedule:
-          rate: rate(1 day)
-          enabled: false
-          input:
-            ORGANISATION_PREFIX: "DEMO_"
+            AIRTABLE_BASE: "XXX" # Set your own base production id
+            AIRTABLE_TABLES: "Table 1;Table 2;Table 3" # Set your tables name
+            "S3_DIRECTORY": "my-production-subdirectory/" # Set the s3 sub-directory
 
   listBackups: # Change to check backup
     handler: src/functions/status.handler
