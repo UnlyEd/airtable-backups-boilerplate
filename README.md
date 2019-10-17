@@ -30,41 +30,34 @@
 ```bash
 nvm use # Select the same node version as the one that'll be used by AWS (see .nvmrc) (optional)
 yarn install # Install node modules
-yarn deploy #
+yarn deploy # Deploy on staging environment
 ```
 
 ### Configure your own Airtable settings
 #### Local development
-Use default environment:
-`cp .env.example .env.development`
 
-Then, fill the `AIRTABLE_TOKEN` with your own
+Everything is already configured for a quick getting started in `mocks/test-event.json`. 
+This JSON object is a mock of what's provided to the crons through the `input` object.
 
-Open data.json
-```json
-{
-    "AIRTABLE_BASE": "XXX",
-    "AIRTABLE_TABLES": "Table 1;Table 2;Table 3",
-    "S3_DIRECTORY": "dev/"
-}
-```
-Explanations :
+Explanations:
 
-* **AIRTABLE_BASE** is the base you want to use for the local developmnent
+* **AIRTABLE_BASE** is the base you want to use
 * **AIRTABLE_TABLES** are the tables name to backup, split by a `;`
 * **S3_DIRECTORY** is the S3 bucket sub-directory to use
 
 Fill free to change the S3 bucket's name in `serverless.yml`:
 ```yaml
 custom:
-  bucket: airtable-backups
+  bucket: my-airtable-backups
 ```
 
-#### Start project locally
+#### Test project locally
 
 ```bash
-yarn invoke:makeBackup
+yarn invoke:airtableBackupsBoilerplate
 ```
+
+> This uses the `sls invoke local` feature under the hood.
 
 If the output of serverless is :
 ```json
@@ -74,67 +67,62 @@ If the output of serverless is :
 }
 ```
 
-All is right ! You can now check your S3 bucket
+Then it means the backup was successfully created. You should now check if your backup exists on your S3 bucket. 
 
-#### Push to production
-Setup in [serverless.yml](./serverless.yml) the schedule :
-```yaml
-makeBackup:
-    handler: src/functions/makeBackup.handler
-    events:
-      - http:
-          path: /backup
-          method: post
-      - schedule:
-          description: "Name of the backup"
-          rate: rate(1 day) # Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
-          enabled: true
-          input:
-            AIRTABLE_BASE: "XXX" # Set your own base production id
-            AIRTABLE_TABLES: "Table 1;Table 2;Table 3" # Set your tables name
-            "S3_DIRECTORY": "my-production-subdirectory/" # Set the s3 sub-directory
-```
-Of course, you're free to add as many schedule as you want !
+---
 
-### Deploy
+## Deploy
+
+> Before deploying, search for all `TODO` in the code source and resolve them. (serverless.yml)
+>
+> They're mostly there to highlight changes that you should perform before deploying this project on AWS.
 
 ```bash
-yarn deploy # Deploy to production
+NODE_ENV=production yarn deploy # Deploys to production
 ```
 
-### Error monitoring
-We are using Epsagon in this boilerplate to monitor errors and lambda invoke. You can set up your own credientials [here](./serverless.yml) as:
+## Error monitoring
+
+We use Epsagon in this boilerplate to monitor errors and lambda invoke. It's very handy for faster debugging.
+
+You can set up your own credentials [in serverless.yml](./serverless.yml):
 ```yaml
 custom:
   epsagon:
-    token: XXX # Set your own token
-    appName: ${self:service}-${self:custom.environment} # The will look as backup-airtable-production
+    token: '' # TODO Set your Epsagon token - Won't be applied if not provided
 ```
 
-> If you don't want to use Epsagon to monitor your lambdas, don't care about this
+This is completely optional and opt-in. You're opt-out by default.
 
-### Logs
+---
 
-**MakeBackup**:
+## Logs
+
+- **airtableBackupsBoilerplate** funciton:
 ```bash
-yarn logs:makeBackup
+yarn logs:airtableBackupsBoilerplate
 ```
 
-**Status**:
+- **status** function:
 ```bash
 yarn logs:status
 ```
 
 Similar to reading the logs from the AWS Console
 
-### Test
+---
+
+## Test
 
 ```
 yarn test
 yarn test:coverage
 ```
 
-### Release
+---
+
+## Release
+
 Will prompt version to release, run tests, commit/push commit + tag
 
 ```
