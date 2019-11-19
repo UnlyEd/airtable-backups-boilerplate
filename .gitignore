@@ -98,9 +98,8 @@ build
 coverage/
 
 # Sensitive values, do not share (development is for local personal use, not super sensitive but shouldn't be shared with the team)
-# XXX Feel free to track development/test/staging files if you wish so, it's usually not too sensitive if you split staging/production properly
+# XXX Feel free to track development/test/staging files if you wish so, we track .env.test to simplify the project's configuration (and because the API key stored in it isn't sensitive to us), but you shouldn't
 .env*
-!.env.staging
 !.env.test
 
 # Epsagon generated files
