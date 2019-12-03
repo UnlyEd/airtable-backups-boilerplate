@@ -51,6 +51,18 @@ custom:
   bucket: my-airtable-backups
 ```
 
+#### Configure AWS S3
+You need to create a bucket [here](https://console.aws.amazon.com/s3/home), the **Create bucket**
+
+You have to match the name with the name provided in [serverless config](./serverless.yml) and choose a region. Leave other options by default works but fill free to customize it.
+
+**PLEASE TAKE CARE if you are using variables in bucket's name**, you need to create each buckets. For example, if you are using `backup-${self:custom.environment}` to have different buckets on each stage, you have to create `backup-development`, `backup-staging`, `backup-production`.
+
+_**OPTIONAL**_
+
+You can set up life-cycle for files in this buckets, useful to clean old backups.
+You can use the official documentation [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html)
+
 #### Test project locally
 
 ```bash
