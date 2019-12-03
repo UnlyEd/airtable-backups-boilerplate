@@ -34,6 +34,11 @@ yarn deploy # Deploy on staging environment
 ```
 
 ### Configure your own Airtable settings
+#### Setup credentials
+You need to provide an Airtable API KEY.
+For a local development, copy basic **.env.staging**: `cp .env.staging .env` and fill with your own API KEY.
+
+For a staging/production, create a file **.env.production** for production or change **.env.staging** for staging.
 #### Local development
 
 Everything is already configured for a quick getting started in `mocks/test-event.json`. 
