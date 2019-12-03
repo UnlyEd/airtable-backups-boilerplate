@@ -70,7 +70,7 @@ functions:
           path: status
           method: get
 
-  makeAirtableBackup:
+  airtableBackupsBoilerplate:
     handler: src/functions/makeAirtableBackup.handler
     events:
       - http:

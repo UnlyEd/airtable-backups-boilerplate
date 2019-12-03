@@ -48,7 +48,7 @@ Explanations:
 
 * **AIRTABLE_BASE** is the base you want to use
 * **AIRTABLE_TABLES** are the tables name to backup, split by a `;`
-* **S3_DIRECTORY** is the S3 bucket sub-directory to use
+* **S3_DIRECTORY** is the S3 bucket sub-directory to use in the provided bucket, usefull to have many backups at the same time
 
 Fill free to change the S3 bucket's name in `serverless.yml`:
 ```yaml
