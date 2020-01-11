@@ -23,13 +23,14 @@
 - [Deploying on AWS](#deploying-on-aws)
 - [Airtable - In depth](#airtable---in-depth)
   * [A word of caution about Airtable API Key](#a-word-of-caution-about-airtable-api-key)
-  * [We leaked our our Airtable API Key!](#we-leaked-our-our-airtable-api-key)
-- [Error monitoring](#error-monitoring)
+  * [We leaked our own Airtable API Key!](#we-leaked-our-own-airtable-api-key)
+- [Error monitoring with Epsagon](#error-monitoring-with-epsagon)
 - [Logs](#logs)
 - [Test](#test)
 - [Release](#release)
 - [FAQ](#faq)
   * [`Can't find Airtable table Video trackers with provided base`](#cant-find-airtable-table-video-trackers-with-provided-base)
+  * [My deployment worked but no file is added to S3, AKA "I don't know what's happening on AWS"](#my-deployment-worked-but-no-file-is-added-to-s3-aka-i-dont-know-whats-happening-on-aws)
 
 <!-- tocstop -->
 
