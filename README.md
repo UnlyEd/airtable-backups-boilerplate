@@ -248,8 +248,21 @@ yarn release
 
 ### `Can't find Airtable table Video trackers with provided base`
 
-> Make sure both your `AIRTABLE_TOKEN`, `AIRTABLE_BASE` and `AIRTABLE_TABLES` are correct. 
+> Make sure all your `AIRTABLE_TOKEN`, `AIRTABLE_BASE` and `AIRTABLE_TABLES` are correct. 
 
 If the base doesn't exist or if the table doesn't exist within that base then you'll get this error.
 
 Same thing if the airtable token is incorrect. It makes it harder to debug a misconfiguration, but that's how Airtable's API works...
+
+### My deployment worked but no file is added to S3, AKA "I don't know what's happening on AWS"
+
+> Make sure to first test your backup configuration with a **fast rate**, like `rate: rate(2 minutes)`
+
+[Watch quick video about how to debug using Epsagon](https://youtu.be/KYdIS82lwlI)
+
+Always use a fast rate when testing things out, that way you have a fast feedback about what's working or not. 
+Don't use `rate: rate(1 day)` before trying your configuration on AWS first, for instance.
+
+**Also, when you deploy your scheduled backup, AWS Lambda won't be triggered immediately. It will actually wait before triggering for the first time.**
+
+> i.e: `rate: rate(1 day)` will not be triggered before 24h after deploying
