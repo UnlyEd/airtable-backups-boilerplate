@@ -73,9 +73,6 @@ functions:
   airtableBackupsBoilerplate:
     handler: src/functions/makeAirtableBackup.handler
     events:
-      - http:
-          path: /backup
-          method: post
       - schedule:
           description: "Airtable backups for the 'Airtable backups boilerplate' base (demo)"
           rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
