@@ -1474,7 +1474,7 @@ agent-base@^4.3.0:
   dependencies:
     es6-promisify "^5.0.0"
 
-airtable@^0.7.1:
+airtable@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.7.1.tgz#1ebad9c9ed332d9348fb3ec3ef9c2d8be452b4f4"
   integrity sha512-VV/8LKyDOtWca2YFMDJWDbPNPkhQPij6+H8SwoLTDEAR/02mTcGI1fSiwC5eW3xfy5Uzn6gLlfTGne7YqxxUkQ==
@@ -1786,6 +1786,21 @@ autolinker@~0.15.0:
   resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-0.15.3.tgz#342417d8f2f3461b14cf09088d5edf8791dc9832"
   integrity sha1-NCQX2PLzRhsUzwkIjV7fh5HcmDI=
 
+aws-sdk@2.534.0:
+  version "2.534.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.534.0.tgz#72eac35c58651eb533044551e5fd06a7a8c8be79"
+  integrity sha512-0wm8mQg+N7vzOaFiM8wwvUXqWayf1ebqfi/SYVygASA79SnRe16pT73X2kEB/DbhXo+487Hf9p3hBGAsjoLcIA==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
 aws-sdk@^2.177.0, aws-sdk@^2.482.0:
   version "2.499.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.499.0.tgz#280955126c4bf245c154eeb00cac6ba987c91c68"
@@ -1794,21 +1809,6 @@ aws-sdk@^2.177.0, aws-sdk@^2.482.0:
     buffer "4.9.1"
     events "1.1.1"
     ieee754 "1.1.8"
-    jmespath "0.15.0"
-    querystring "0.2.0"
-    sax "1.2.1"
-    url "0.10.3"
-    uuid "3.3.2"
-    xml2js "0.4.19"
-
-aws-sdk@^2.534.0:
-  version "2.534.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.534.0.tgz#72eac35c58651eb533044551e5fd06a7a8c8be79"
-  integrity sha512-0wm8mQg+N7vzOaFiM8wwvUXqWayf1ebqfi/SYVygASA79SnRe16pT73X2kEB/DbhXo+487Hf9p3hBGAsjoLcIA==
-  dependencies:
-    buffer "4.9.1"
-    events "1.1.1"
-    ieee754 "1.1.13"
     jmespath "0.15.0"
     querystring "0.2.0"
     sax "1.2.1"
@@ -3170,7 +3170,7 @@ enhanced-resolve@^4.1.0:
     memory-fs "^0.4.0"
     tapable "^1.0.0"
 
-epsagon@^1.37.0:
+epsagon@1.37.0:
   version "1.37.0"
   resolved "https://registry.yarnpkg.com/epsagon/-/epsagon-1.37.0.tgz#f474be417a209fe330272f99b26a7e76cbc10930"
   integrity sha512-6Aty40/apoxaUbUM3DFX/7kGDggurHmpWZ+lEUW2H9n4E3xBNqm1LgU0/SE2TLwVFYeKEO1SITAh1CwQL3HS8g==
@@ -6212,7 +6212,7 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
-moment@^2.24.0:
+moment@2.24.0, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -7716,7 +7716,7 @@ serverless-offline@5.8.0:
     trim-newlines "^3.0.0"
     velocityjs "^1.1.3"
 
-serverless-plugin-epsagon@^1.6.1:
+serverless-plugin-epsagon@1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/serverless-plugin-epsagon/-/serverless-plugin-epsagon-1.6.1.tgz#ef08cc7e3eeca1dffb2ab8d959b129bec5859ca1"
   integrity sha512-akd9+KIdaWO6Ye3JMlOfB37yrxQ/2iRAWsbNGIKz4irIPNlKQvUH0ShOWa+5YplEtx0JwD/+ELHaOX/v7RxAMg==
