@@ -10,7 +10,7 @@
     "sls:remove": "NODE_ENV=${NODE_ENV:-staging} sls remove",
     "sls:info": "NODE_ENV=${NODE_ENV:-staging} sls info",
     "start": "NODE_ENV=${NODE_ENV:-development}; sls offline start",
-    "invoke:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} yarn sls:dotenv && sls invoke local -f airtableBackupsBoilerplate -p mocks/test-event.json",
+    "invoke:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} yarn sls:dotenv && NODE_ENV=${NODE_ENV:-staging} sls invoke local -f airtableBackupsBoilerplate -p mocks/test-event.json",
     "deploy": "NODE_ENV=${NODE_ENV:-staging} sls deploy",
     "logs:airtableBackupsBoilerplate": "NODE_ENV=${NODE_ENV:-staging} sls logs -f airtableBackupsBoilerplate --tail",
     "logs:status": "NODE_ENV=${NODE_ENV:-staging}; sls logs -f status -s $NODE_ENV --startTime 10m",

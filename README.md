@@ -68,6 +68,8 @@ _**OPTIONAL**_
 You can set up life-cycle for files in this buckets, useful to clean old backups.
 You can use the official documentation [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html)
 
+For a more detailed tutorial on how to delete backups after X days, [see this advanced tutorial](https://www.joe0.com/2017/05/24/amazon-s3-how-to-delete-files-older-than-x-days/) 
+
 #### Test project locally
 
 ```bash
