@@ -84,3 +84,13 @@ functions:
             AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
             AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
             S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in
+
+      # You can duplicate schedule as much as you want.
+      #- schedule:
+      #    description: "Airtable backups for the 'Airtable backups boilerplate' base (demo)"
+      #    rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+      #    enabled: true
+      #    input: # XXX As a demo, we use a base generated from an official template, it's also used to perform automated tests (CI)
+      #      AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
+      #      AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
+      #      S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in
