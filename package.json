@@ -24,7 +24,9 @@
     "test:serie": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --watch --runInBand",
     "test:once": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test",
     "test:coverage": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --coverage",
-    "test:coverage:serie": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --coverage --runInBand"
+    "test:coverage:serie": "NODE_ENV=test yarn sls:dotenv && serverless-bundle test --coverage --runInBand",
+    "snyk-protect": "snyk protect",
+    "prepare": "yarn run snyk-protect"
   },
   "jest": {
     "setupFilesAfterEnv": [
@@ -34,18 +36,19 @@
   },
   "dependencies": {
     "@unly/utils-aws": "1.0.3",
-    "airtable": "0.7.1",
+    "airtable": "0.7.2",
     "aws-sdk": "2.534.0",
     "dotenv": "8.0.0",
     "epsagon": "1.37.0",
     "moment": "2.24.0",
-    "serverless-plugin-epsagon": "1.6.1"
+    "serverless-plugin-epsagon": "1.6.1",
+    "snyk": "^1.278.0"
   },
   "devDependencies": {
     "@unly/serverless-env-copy-plugin": "1.0.0",
     "git-revision-webpack-plugin": "3.0.3",
     "jest": "24.8.0",
-    "jest-extended": "0.11.1",
+    "jest-extended": "0.11.2",
     "markdown-toc": "1.2.0",
     "serverless": "1.46.0",
     "serverless-bundle": "1.2.3",
@@ -53,5 +56,6 @@
     "serverless-dotenv-plugin": "2.0.1",
     "serverless-offline": "5.8.0",
     "version-bump-prompt": "5.0.0"
-  }
+  },
+  "snyk": true
 }
