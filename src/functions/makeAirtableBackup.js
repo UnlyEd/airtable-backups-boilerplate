@@ -8,12 +8,15 @@ export const handler = async (event, context, callback) => {
     Epsagon.setError(err);
     throw err;
   }
+
   const tables = event['AIRTABLE_TABLES'].split(';');
   const airtableContent = await fetchDataFromAirtable(event, tables);
+
   try {
     await uploadBackup(event, airtableContent);
   } catch (e) {
     Epsagon.setError(e);
+
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -22,8 +25,4 @@ export const handler = async (event, context, callback) => {
       }),
     };
   }
-  return {
-    statusCode: 200,
-    body: 'Successfully created backup',
-  };
 };

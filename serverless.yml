@@ -70,24 +70,26 @@ functions:
           path: status
           method: get
 
-  airtableBackupsBoilerplate:
+  airtableBackups: # The same lambda is used to configure all backups (each backup is a distinct "scheduled event", AKA "cron")
     handler: src/functions/makeAirtableBackup.handler
     events:
       - schedule:
           description: "Airtable backups for the 'Airtable backups boilerplate' base (demo)"
           rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
           enabled: true
-          input: # XXX As a demo, we use a base generated from an official template, it's also used to perform automated tests (CI)
+          input:
             AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
             AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
             S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in
+            STORAGE_CLASS: 'STANDARD_IA' # Set the storage class to use within those values: "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE" - See https://aws.amazon.com/en/s3/storage-classes/
 
-      # You can duplicate schedule as much as you want.
-      #- schedule:
-      #    description: "Airtable backups for the 'Airtable backups boilerplate' base (demo)"
-      #    rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
-      #    enabled: true
-      #    input: # XXX As a demo, we use a base generated from an official template, it's also used to perform automated tests (CI)
-      #      AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
-      #      AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
-      #      S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in
+# XXX You can configure another scheduled backup just by creating another "event"
+#      - schedule:
+#          description: "Another backup for another Airtable base"
+#          rate: rate(5 minutes) # TODO Set your own rate : https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+#          enabled: true
+#          input:
+#            AIRTABLE_BASE: "app7nfLmoVHva1Vdv" # TODO Set your own base id
+#            AIRTABLE_TABLES: "Video tracker;Staff directory;Agencies;Agency contacts;Scenes;Shots;Locations;Props and equipment" # TODO Set your table names
+#            S3_DIRECTORY: "airtableBackupsBoilerplate/" # TODO Set the s3 sub-directory you want the backups to be stored in
+#            STORAGE_CLASS: 'STANDARD_IA' # Set the storage class to use within those values: "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE" - See https://aws.amazon.com/en/s3/storage-classes/
