@@ -1,3 +1,7 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate?targetFile=package.json)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a6ff14f16df566d20013/maintainability)](https://codeclimate.com/github/UnlyEd/airtable-backups-boilerplate/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a6ff14f16df566d20013/test_coverage)](https://codeclimate.com/github/UnlyEd/airtable-backups-boilerplate/test_coverage)
+
 # Airtable Backup Boilerplate
 
 > This project is a boilerplate meant to perform backups of Airtable Bases, at a regular interval (scheduled backups, AKA crons).
@@ -31,7 +35,9 @@
 - [FAQ](#faq)
   * [`Can't find Airtable table Video trackers with provided base`](#cant-find-airtable-table-video-trackers-with-provided-base)
   * [My deployment worked but no file is added to S3, AKA "I don't know what's happening on AWS"](#my-deployment-worked-but-no-file-is-added-to-s3-aka-i-dont-know-whats-happening-on-aws)
-
+- [Vulnerability disclosure](#vulnerability-disclosure)
+- [Contributors and maintainers](#contributors-and-maintainers)
+- [**[ABOUT UNLY]**](#about-unly-)
 <!-- tocstop -->
 
 ## Our recommended AWS configuration
@@ -267,3 +273,36 @@ Don't use `rate: rate(1 day)` before trying your configuration on AWS first, for
 **Also, when you deploy your scheduled backup, AWS Lambda won't be triggered immediately. It will actually wait before triggering for the first time.**
 
 > i.e: `rate: rate(1 day)` will not be triggered before 24h after deploying
+
+# Vulnerability disclosure
+
+[See our policy](https://github.com/UnlyEd/Unly).
+
+---
+
+# Contributors and maintainers
+
+This project is being maintained by:
+- [Unly] Ambroise Dhenain ([Vadorequest](https://github.com/vadorequest)) **(active)**
+
+Thanks to our contributors:
+- Hugo Martin ([Demmonius](https://github.com/Demmonius))
+
+---
+
+# **[ABOUT UNLY]** <a href="https://unly.org"><img src="https://storage.googleapis.com/unly/images/ICON_UNLY.png" height="40" align="right" alt="Unly logo" title="Unly logo" /></a>
+
+> [Unly](https://unly.org) is a socially responsible company, fighting inequality and facilitating access to higher education. 
+> Unly is committed to making education more inclusive, through responsible funding for students. 
+
+We provide technological solutions to help students find the necessary funding for their studies. 
+
+We proudly participate in many TechForGood initiatives. To support and learn more about our actions to make education accessible, visit : 
+- https://twitter.com/UnlyEd
+- https://www.facebook.com/UnlyEd/
+- https://www.linkedin.com/company/unly
+- [Interested to work with us?](https://jobs.zenploy.io/unly/about)
+
+Tech tips and tricks from our CTO on our [Medium page](https://medium.com/unly-org/tech/home)!
+
+#TECHFORGOOD #EDUCATIONFORALL
