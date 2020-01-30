@@ -1,7 +1,7 @@
 <a href="https://unly.org"><img src="https://storage.googleapis.com/unly/images/ICON_UNLY.png" align="right" height="20" alt="Unly logo" title="Unly logo" /></a>
-[![Known Vulnerabilities](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate?targetFile=package.json)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a6ff14f16df566d20013/maintainability)](https://codeclimate.com/github/UnlyEd/airtable-backups-boilerplate/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a6ff14f16df566d20013/test_coverage)](https://codeclimate.com/github/UnlyEd/airtable-backups-boilerplate/test_coverage)
+[![Known Vulnerabilities](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/UnlyEd/airtable-backups-boilerplate?targetFile=package.json)
 
 # Airtable Backup Boilerplate
 
