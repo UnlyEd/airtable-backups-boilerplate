@@ -285,9 +285,7 @@ Don't use `rate: rate(1 day)` before trying your configuration on AWS first, for
 
 This project is being maintained by:
 - [Unly] Ambroise Dhenain ([Vadorequest](https://github.com/vadorequest)) **(active)**
-
-Thanks to our contributors:
-- Hugo Martin ([Demmonius](https://github.com/Demmonius))
+- [Contributor] Hugo Martin ([Demmonius](https://github.com/Demmonius)) **(active)**
 
 ---
 
