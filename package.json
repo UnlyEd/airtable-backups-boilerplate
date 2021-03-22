@@ -34,8 +34,8 @@
   },
   "dependencies": {
     "@unly/utils-aws": "1.0.3",
-    "airtable": "0.7.2",
-    "aws-sdk": "2.534.0",
+    "airtable": "0.10.1",
+    "aws-sdk": "2.868.0",
     "dotenv": "8.0.0",
     "epsagon": "1.106.1",
     "inquirer": "7.0.0",
