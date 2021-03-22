@@ -37,22 +37,22 @@
     "airtable": "0.7.2",
     "aws-sdk": "2.534.0",
     "dotenv": "8.0.0",
-    "epsagon": "^1.106.1",
-    "inquirer": "^7.0.0",
+    "epsagon": "1.106.1",
+    "inquirer": "7.0.0",
     "moment": "2.24.0",
-    "serverless-plugin-epsagon": "^1.10.1"
+    "serverless-plugin-epsagon": "1.10.1"
   },
   "devDependencies": {
     "@unly/serverless-env-copy-plugin": "1.0.0",
-    "eslint": "^7.22.0",
+    "eslint": "7.22.0",
     "git-revision-webpack-plugin": "3.0.3",
     "jest": "24.9.0",
     "jest-extended": "0.11.2",
     "markdown-toc": "1.2.0",
-    "serverless": "^2.30.2",
-    "serverless-bundle": "^4.2.2",
-    "serverless-dotenv-plugin": "^3.8.1",
-    "serverless-offline": "^6.8.0",
+    "serverless": "2.30.2",
+    "serverless-bundle": "4.2.2",
+    "serverless-dotenv-plugin": "3.8.1",
+    "serverless-offline": "6.8.0",
     "version-bump-prompt": "5.0.0"
   }
 }

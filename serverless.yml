@@ -1,7 +1,8 @@
 service: airtable-backups-demo
 
-frameworkVersion: "^2.30.2"
+frameworkVersion: "=2.30.2"
 
+# Validation warnings will become errors by default in serverless 3.0; turn this on preemptively https://www.serverless.com/framework/docs/configuration-validation/
 configValidationMode: error
 
 plugins:
