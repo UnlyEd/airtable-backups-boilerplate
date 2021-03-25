@@ -38,7 +38,6 @@
     "aws-sdk": "2.868.0",
     "dotenv": "8.0.0",
     "epsagon": "1.106.1",
-    "inquirer": "7.0.0",
     "moment": "2.24.0",
     "serverless-plugin-epsagon": "1.10.1"
   },
