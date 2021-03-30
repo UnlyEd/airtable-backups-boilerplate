@@ -52,6 +52,7 @@
     "serverless-bundle": "4.2.2",
     "serverless-dotenv-plugin": "3.8.1",
     "serverless-offline": "6.8.0",
+    "ts-jest": "26.5.4",
     "version-bump-prompt": "5.0.0"
   }
 }
