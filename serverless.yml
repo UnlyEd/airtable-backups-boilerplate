@@ -1,6 +1,9 @@
 service: airtable-backups-demo
 
-frameworkVersion: "=1.46.0"
+frameworkVersion: "=2.30.3"
+
+# Validation warnings will become errors by default in serverless 3.0; turn this on preemptively https://www.serverless.com/framework/docs/configuration-validation/
+configValidationMode: error
 
 plugins:
   - serverless-plugin-epsagon # Must be first, see https://github.com/epsagon/serverless-plugin-epsagon
@@ -30,7 +33,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs14.x
   versionFunctions: false
   logRetentionInDays: 60
   timeout: 30
@@ -47,14 +50,18 @@ provider:
   apiGateway:
     binaryMediaTypes:
       - '*/*' # Allow to return all binary response types - See https://serverless.com/blog/framework-release-v142/
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:PutObjectAcl
-      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:PutObjectAcl
+          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
   deploymentBucket:
     serverSideEncryption: AES256
+    blockPublicAccess: true
+
   stackTags:
     env: ${self:custom.environment}
     stage: ${self:provider.stage}

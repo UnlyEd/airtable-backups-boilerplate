@@ -3,7 +3,7 @@ import { fetchDataFromAirtable } from '../utils/airtableParser';
 import { uploadBackup } from '../utils/backup';
 
 export const handler = async (event, context, callback) => {
-  if (!event.hasOwnProperty('AIRTABLE_BASE') || !event.hasOwnProperty('AIRTABLE_TABLES') || !event.hasOwnProperty('S3_DIRECTORY')) {
+  if (!Object.prototype.hasOwnProperty.call(event, 'AIRTABLE_BASE') || !Object.hasOwnProperty.call(event, 'AIRTABLE_TABLES') || !Object.hasOwnProperty.call(event, 'S3_DIRECTORY')) {
     const err = Error(`Can't access to AIRTABLE_BASE or AIRTABLE_TABLES or S3_DIRECTORY in the event variable`);
     Epsagon.setError(err);
     throw err;
