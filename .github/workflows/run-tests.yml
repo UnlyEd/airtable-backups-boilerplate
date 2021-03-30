@@ -1,5 +1,5 @@
 # Summary:
-# Test if the projects tests pass.
+# Test if the project's tests pass.
 
 name: 'Run tests'
 on:
