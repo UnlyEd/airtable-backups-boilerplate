@@ -1,0 +1,18 @@
+# Summary:
+# Test if the project's tests pass.
+
+name: 'Run tests'
+on:
+  pull_request:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          yarn
+          yarn test:once

@@ -17,7 +17,7 @@ export const fetchDataFromAirtable = async (event, tables) => {
         jsonRecords[el] = (records.map((record) => record._rawJson));
       });
     } catch (e) {
-      const err = Error(`Can't find Airtable table ${el} with provided base`);
+      const err = Error(`Can't find Airtable table ${el} with provided base ${event['AIRTABLE_BASE']}, original error: ${e}`);
       Epsagon.setError(err);
       throw err;
     }
